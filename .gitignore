@@ -3,3 +3,4 @@
 *.pyc
 /.pytest_cache
 /build
+/tests/test-images/predicted_images
