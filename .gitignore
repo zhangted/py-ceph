@@ -1,0 +1,4 @@
+/py_ceph.egg-info
+/test-images
+/src/py_ceph.egg-info
+*.pyc
