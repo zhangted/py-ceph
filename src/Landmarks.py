@@ -19,8 +19,8 @@ class Landmarks(Enum):
   LOWER_LIP = 13
   SUBNASALE = 14
   SOFT_TISSUE_POGONION = 15
-  PNS = 16
-  ANS = 17
+  POSTERIOR_NASAL_SPINE = 16
+  ANTERIOR_NASAL_SPINE = 17
   ARTICULARE = 18
 
   def __str__(self):

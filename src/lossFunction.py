@@ -19,8 +19,8 @@ class fusionLossFunc_improved(nn.Module):
 		self.imageNum = config.batchSize
 		self.landmarkNum = config.landmarkNum
 
-		self.binaryLoss = nn.BCEWithLogitsLoss(None, True).cuda(config.use_gpu)
-		self.l1Loss = torch.nn.L1Loss().cuda(config.use_gpu)
+		self.binaryLoss = nn.BCEWithLogitsLoss(None, True).to(config.use_gpu)
+		self.l1Loss = torch.nn.L1Loss().to(config.use_gpu)
 
 		self.offsetMapx = np.ones((self.higth*2, self.width*2))
 		self.offsetMapy = np.ones((self.higth*2, self.width*2))
@@ -28,12 +28,12 @@ class fusionLossFunc_improved(nn.Module):
 		self.HeatMap = np.zeros((self.higth*2, self.width*2))
 		self.mask = np.zeros((self.higth*2, self.width*2))
 		
-		#~ self.binary_class_groundTruth = Variable(torch.zeros(imageNum, landmarkNum, h, w).cuda(self.use_gpu))
-		self.offsetMapX_groundTruth = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).cuda(self.use_gpu))
-		self.offsetMapY_groundTruth = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).cuda(self.use_gpu))
-		self.binary_class_groundTruth1 = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).cuda(self.use_gpu))
-		self.binary_class_groundTruth2 = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).cuda(self.use_gpu))
-		self.offsetMask = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).cuda(self.use_gpu))
+		#~ self.binary_class_groundTruth = Variable(torch.zeros(imageNum, landmarkNum, h, w).to(self.use_gpu))
+		self.offsetMapX_groundTruth = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).to(self.use_gpu))
+		self.offsetMapY_groundTruth = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).to(self.use_gpu))
+		self.binary_class_groundTruth1 = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).to(self.use_gpu))
+		self.binary_class_groundTruth2 = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).to(self.use_gpu))
+		self.offsetMask = Variable(torch.zeros(self.imageNum, self.landmarkNum, self.higth, self.width).to(self.use_gpu))
 		
 		rr = config.R1
 		dev = 4
@@ -60,12 +60,12 @@ class fusionLossFunc_improved(nn.Module):
 		
 		self.offsetMapx = referPoint[0] - self.offsetMapx
 		self.offsetMapy = referPoint[1] - self.offsetMapy
-		self.HeatMap = Variable(torch.from_numpy(self.HeatMap)).cuda(self.use_gpu).float()
-		self.mask = Variable(torch.from_numpy(self.mask)).cuda(self.use_gpu).float()
-		self.offsetMapx = Variable(torch.from_numpy(self.offsetMapx)).cuda(self.use_gpu).float() / config.R2
-		self.offsetMapy = Variable(torch.from_numpy(self.offsetMapy)).cuda(self.use_gpu).float() / config.R2
+		self.HeatMap = Variable(torch.from_numpy(self.HeatMap)).to(self.use_gpu).float()
+		self.mask = Variable(torch.from_numpy(self.mask)).to(self.use_gpu).float()
+		self.offsetMapx = Variable(torch.from_numpy(self.offsetMapx)).to(self.use_gpu).float() / config.R2
+		self.offsetMapy = Variable(torch.from_numpy(self.offsetMapy)).to(self.use_gpu).float() / config.R2
 		
-		self.zeroTensor = torch.zeros((self.imageNum, self.landmarkNum, self.higth, self.width)).cuda(self.use_gpu)
+		self.zeroTensor = torch.zeros((self.imageNum, self.landmarkNum, self.higth, self.width)).to(self.use_gpu)
 		
 		return
 	

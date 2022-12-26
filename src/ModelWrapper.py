@@ -1,0 +1,40 @@
+import torch
+import gzip
+
+class ModelWrapper:
+  def __init__(self, model_path, device):
+    self.model_path = model_path
+    self.device = device
+  
+  def load_model(self):
+    with gzip.open(self.model_path, 'rb') as zipped_model:
+      device = torch.device(self.device)
+      print(f"Running on device: {device}")
+      self.model = torch.load(zipped_model, map_location=device)
+      return self.model
+
+  def get_model(self):
+    return self.load_model()
+
+
+'''
+# save model as gzip
+import gzip
+import torch
+
+# Save the model
+torch.save(model.state_dict(), 'model.pkl')
+
+# Compress the model
+with open('model.pkl', 'rb') as f_in, gzip.open('model.pkl.gz', 'wb') as f_out:
+    f_out.writelines(f_in)
+
+
+# load compressed model
+import gzip
+import torch
+
+# Load the compressed model
+with gzip.open('model.pkl.gz', 'rb') as f:
+    model = torch.load(f)
+'''

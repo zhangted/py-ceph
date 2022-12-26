@@ -5,10 +5,13 @@ import torch
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
+import pkg_resources
 
 import utils
 from Landmarks import Landmarks
 from ConsoleMsg import ConsoleMsg
+from ModelWrapper import ModelWrapper
+from Helpers import check_path, maybe_terminate
 
 class CephImage:
   def __init__(self, img_path):
@@ -109,7 +112,13 @@ class CephImageBatch:
       abs_image_path = os.path.abspath(image_path)
       self.batch.append(CephImage(abs_image_path))
 
-  def process(self, model, config):
+  def process(self, config):
+    model_path = pkg_resources.resource_filename(__name__, config.model_path)
+    maybe_terminate(check_path(model_path), path=model_path, item_name="Pretrained Model")
+
+    modelWrapper = ModelWrapper(model_path, device=config.use_gpu)
+    model = modelWrapper.load_model()
+
     for ceph_img in self.batch:
       ceph_img.process(model, config)
       if len(self.batch) == 1:

@@ -47,6 +47,7 @@ Output
 <br>
 
 ## Dependencies
+- pytest
 - torch
 - numpy
 - torch
