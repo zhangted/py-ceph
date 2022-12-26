@@ -13,6 +13,9 @@ py-ceph --image_src my-single-image-path
 For single image processing, it will output:
 - the image interactively with a grid
 - the labeled landmarks to the console
+
+<img src="single.png" alt="single file processing example" width="500"/>
+
 ____
 ```commandline
 py-ceph --image_folder my-image-folder-path
