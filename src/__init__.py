@@ -6,3 +6,4 @@ from . import CephImageBatch
 from . import ConsoleMsg
 from . import predict
 from . import ModelWrapper
+from . import CLIConfig

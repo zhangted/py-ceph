@@ -12,7 +12,7 @@ def create_CLI_config():
   parser.add_argument("--image_folder", default=None, type=str)
   parser.add_argument("--image_src", default=None, type=str)
   parser.add_argument("--image_scale", default=(800, 640), type=tuple)
-  parser.add_argument("--model_path", default='pretrained_models/12-24-22.zip', type=str)
+  parser.add_argument("--model_path", default='pretrained_models/12-26-22.pkl.gz', type=str)
   parser.add_argument("--use_gpu", default=torch_device_str(0), type=torch_device_str)
   config = parser.parse_args()
   config.landmarksNum = 19
@@ -25,10 +25,10 @@ def validate_input(config):
   elif(config.image_folder is None and config.image_src is None):
     terminate('Must specify batch folder OR single image to be processed')
   elif(config.image_folder):
-    maybe_terminate(check_path(config.image_folder), path=config.image_folder, item_name='Image Folder')
+    maybe_terminate(path=config.image_folder, item_name='Image Folder')
     return config
   elif(config.image_src):
-    maybe_terminate(check_path(config.image_src), path=config.image_src, item_name='Image Src')
+    maybe_terminate(path=config.image_src, item_name='Image Src')
     return config
 
 def create_image_batch(config):

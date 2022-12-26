@@ -114,7 +114,7 @@ class CephImageBatch:
 
   def process(self, config):
     model_path = pkg_resources.resource_filename(__name__, config.model_path)
-    maybe_terminate(check_path(model_path), path=model_path, item_name="Pretrained Model")
+    maybe_terminate(path=model_path, item_name="Pretrained Model")
 
     modelWrapper = ModelWrapper(model_path, device=config.use_gpu)
     model = modelWrapper.load_model()
