@@ -7,7 +7,7 @@ def clean_paths(config):
   config.image_src = clean_path(config.image_src)
   return config
 
-def create_CLI_config():
+def create_CLI_config(validate=True):
   parser = argparse.ArgumentParser()
   parser.add_argument("--image_folder", default=None, type=str)
   parser.add_argument("--image_src", default=None, type=str)
@@ -17,6 +17,8 @@ def create_CLI_config():
   config = parser.parse_args()
   config.landmarksNum = 19
   config.R1, config.R2 = 41, 41
+
+  if not validate: return config
   return validate_input(clean_paths(config))
 
 def validate_input(config):

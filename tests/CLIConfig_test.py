@@ -1,8 +1,14 @@
 import unittest
-import pytest
 from src.CLIConfig import *
 
-#https://stackoverflow.com/questions/18160078/how-do-you-write-tests-for-the-argparse-portion-of-a-python-module
-
 class CLIConfigTest(unittest.TestCase):
-  pass
+  def test_create_empty_CLI_config(self):
+    config = create_CLI_config(validate=False)
+    assert config.image_folder is None
+    assert config.image_src is None
+    assert config.image_scale
+    assert config.model_path
+    assert config.use_gpu
+    assert config.landmarksNum
+    assert config.R1
+    assert config.R2

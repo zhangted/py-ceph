@@ -6,10 +6,6 @@ from skimage import io
 
 from src.CephImageBatch import *
 
-def force_torch_use_cpu(config):
-  config.use_gpu = -1
-  return config
-
 @pytest.fixture
 def newCephImageBatch_single():
   test_image_src = 'tests/test-images/001.jpg'

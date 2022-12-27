@@ -1,20 +1,23 @@
 import torch
 import gzip
+import pkg_resources
+
+from Helpers import maybe_terminate
 
 class ModelWrapper:
-  def __init__(self, model_path, device):
+  def __init__(self, config):
+    model_path = pkg_resources.resource_filename(__name__, config.model_path)
+    maybe_terminate(path=model_path, item_name="Pretrained Model")
+
     self.model_path = model_path
-    self.device = device
-  
+    self.device = config.use_gpu
+
   def load_model(self):
     with gzip.open(self.model_path, 'rb') as zipped_model:
       device = torch.device(self.device)
       print(f"Running on device: {device}")
-      self.model = torch.load(zipped_model, map_location=device)
-      return self.model
+      return torch.load(zipped_model, map_location=device)
 
-  def get_model(self):
-    return self.load_model()
 
 
 '''

@@ -5,19 +5,17 @@ import torch
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
-import pkg_resources
 
 import utils
 from Landmarks import Landmarks
 from ConsoleMsg import ConsoleMsg
 from ModelWrapper import ModelWrapper
-from Helpers import check_path, maybe_terminate
 
 class CephImage:
   def __init__(self, img_path):
     self.filename = img_path
     self.image = io.imread(img_path)
-    self.landmarks = [None for i in range(19)]
+    self.landmarks = [None for _ in range(19)]
 
   def process(self, model, config):
     new_h, new_w = config.image_scale
@@ -49,7 +47,7 @@ class CephImage:
         image[y2][x2] = color
         self.color_surrounding_from_pixel(image, y2, x2, [0, 0.1, 0.15], levels-1)
 
-  def print_landmarks_and_edit_image(self):
+  def print_landmarks_and_mark_on_image(self):
     print(f"{self.filename} Landmarks")
     for idx, (x, y) in enumerate(self.landmarks):
       print(Landmarks(idx), [x, y])
@@ -58,7 +56,7 @@ class CephImage:
     print("\n\n\n")
 
   def save_landmarks_to_jpg_and_csv(self):
-    self.print_landmarks_and_edit_image()
+    self.print_landmarks_and_mark_on_image()
 
     uint8_image = (self.image * 255).round().astype(np.uint8)
     #https://stackoverflow.com/questions/26918390/python-make-rgb-image-from-3-float32-numpy-arrays
@@ -90,7 +88,7 @@ class CephImage:
       writer.writerow(arr)
 
   def show_interactive_landmarks(self):
-    self.print_landmarks_and_edit_image()
+    self.print_landmarks_and_mark_on_image()
     plt.ion()
     io.imshow(self.image)
     ConsoleMsg.print_terminate()
@@ -113,10 +111,7 @@ class CephImageBatch:
       self.batch.append(CephImage(abs_image_path))
 
   def process(self, config):
-    model_path = pkg_resources.resource_filename(__name__, config.model_path)
-    maybe_terminate(path=model_path, item_name="Pretrained Model")
-
-    modelWrapper = ModelWrapper(model_path, device=config.use_gpu)
+    modelWrapper = ModelWrapper(config)
     model = modelWrapper.load_model()
 
     for ceph_img in self.batch:
