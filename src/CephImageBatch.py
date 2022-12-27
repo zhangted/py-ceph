@@ -93,6 +93,12 @@ class CephImage:
     io.imshow(self.image)
     ConsoleMsg.print_terminate()
 
+  def to_dict(self):
+    landmarks = {}
+    for i, coord in enumerate(self.landmarks):
+      landmarks[str(Landmarks(i))] = coord
+    return landmarks
+
 class CephImageBatch:
   def __init__(self, img_folder=None, img_path=None):
     self.VALID_IMAGE_TYPES = set(['.png', '.jpg', 'jpeg', '.bmp'])
@@ -122,7 +128,8 @@ class CephImageBatch:
         ceph_img.save_landmarks_to_jpg_and_csv()
   
   def process(self, config):
-    modelWrapper = ModelWrapper(config)
+    modelWrapper = ModelWrapper(config, from_cli=False)
     model = modelWrapper.load_model()
     for ceph_img in self.batch: ceph_img.process(model, config)
-    return self.batch
+    return map(lambda x: x.to_dict(), self.batch)
+

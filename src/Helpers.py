@@ -5,14 +5,15 @@ from ConsoleMsg import ConsoleMsg
 def check_path(path):
   return os.path.exists(os.path.abspath(path))
 
-def maybe_terminate(path=None, item_name=None):
+def maybe_terminate(path=None, item_name=None, from_cli=True):
   if check_path(path): return
   abs_path = os.path.abspath(path)
   item_name = f"for {item_name}" if item_name else ''
-  terminate(f"Invalid path {item_name}: {abs_path}")
+  terminate(f"Invalid path {item_name}: {abs_path}", from_cli)
 
-def terminate(msg):
-  ConsoleMsg.print_err_terminate(msg)
+def terminate(msg, from_cli):
+  if from_cli: ConsoleMsg.print_err_terminate(msg)
+  else: raise Exception(msg)
 
 def clean_path(path):
   return path.replace("'", '').replace('"', '') if path else None

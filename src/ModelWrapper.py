@@ -5,9 +5,9 @@ import pkg_resources
 from Helpers import maybe_terminate
 
 class ModelWrapper:
-  def __init__(self, config):
+  def __init__(self, config, from_cli=True):
     model_path = pkg_resources.resource_filename(__name__, config.model_path)
-    maybe_terminate(path=model_path, item_name="Pretrained Model")
+    maybe_terminate(path=model_path, item_name="Pretrained Model", from_cli=from_cli)
 
     self.model_path = model_path
     self.device = config.use_gpu
