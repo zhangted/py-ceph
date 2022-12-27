@@ -110,7 +110,7 @@ class CephImageBatch:
       abs_image_path = os.path.abspath(image_path)
       self.batch.append(CephImage(abs_image_path))
 
-  def process(self, config):
+  def process_cli(self, config):
     modelWrapper = ModelWrapper(config)
     model = modelWrapper.load_model()
 
@@ -120,3 +120,9 @@ class CephImageBatch:
         ceph_img.show_interactive_landmarks()
       else:
         ceph_img.save_landmarks_to_jpg_and_csv()
+  
+  def process(self, config):
+    modelWrapper = ModelWrapper(config)
+    model = modelWrapper.load_model()
+    for ceph_img in self.batch: ceph_img.process(model, config)
+    return self.batch

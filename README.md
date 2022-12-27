@@ -41,12 +41,13 @@ Output
 <br><br><br>
 
 ## To-do
-- Non-CLI usage
+- <s>Non-CLI usage</s>
 - PyPi package
 
 <br>
 
 ## Dependencies
+- pyyaml
 - pytest
 - torch
 - numpy

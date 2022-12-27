@@ -1,5 +1,8 @@
 import argparse
-from Helpers import torch_device_str, clean_path, check_path, terminate, maybe_terminate
+import yaml
+import pkg_resources
+
+from Helpers import torch_device_str, clean_path, terminate, maybe_terminate
 from CephImageBatch import CephImageBatch
 
 def clean_paths(config):
@@ -7,16 +10,26 @@ def clean_paths(config):
   config.image_src = clean_path(config.image_src)
   return config
 
+def set_torch_device(config):
+  config.use_gpu = torch_device_str(config.use_gpu)
+  return config
+
+def load_inputs_defaults():
+  try:
+    input_yaml_path = pkg_resources.resource_filename(__name__, 'input.yml')
+    with open(input_yaml_path, 'r') as stream:
+      return yaml.safe_load(stream)
+  except Exception as e: terminate(e)
+
 def create_CLI_config(validate=True):
+  input_dict = load_inputs_defaults()
   parser = argparse.ArgumentParser()
-  parser.add_argument("--image_folder", default=None, type=str)
-  parser.add_argument("--image_src", default=None, type=str)
-  parser.add_argument("--image_scale", default=(800, 640), type=tuple)
-  parser.add_argument("--model_path", default='pretrained_models/12-26-22.pkl.gz', type=str)
-  parser.add_argument("--use_gpu", default=torch_device_str(0), type=torch_device_str)
+
+  for arg_name in input_dict.keys():
+    parser.add_argument(f"--{arg_name}", default=input_dict[arg_name])
+
   config = parser.parse_args()
-  config.landmarksNum = 19
-  config.R1, config.R2 = 41, 41
+  config = set_torch_device(config)
 
   if not validate: return config
   return validate_input(clean_paths(config))

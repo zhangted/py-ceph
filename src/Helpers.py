@@ -25,6 +25,7 @@ def torch_device_str(arg):
   try:
     gpu = int(arg)
     if 0 <= gpu < cuda_devices: return f"cuda:{gpu}"
-    raise Exception('nonexistent cuda device')
+    raise Exception(f"Torch tried to select nonexistent cuda:{gpu}. Defaulting to cuda:0.")
   except Exception as e:
+    print(e)
     return "cuda:0"
