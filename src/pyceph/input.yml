@@ -1,0 +1,8 @@
+image_folder: null
+image_src: null
+image_scale: [800, 640]
+model_path: 'pretrained_models/12-26-22.pkl.gz'
+use_gpu: 0
+landmarksNum: 19
+R1: 41
+R2: 41
