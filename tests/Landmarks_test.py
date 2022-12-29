@@ -1,5 +1,5 @@
 import unittest
-from src.Landmarks import *
+from src.pyceph.Landmarks import *
 
 class LandmarksTest(unittest.TestCase):
   def test_num_landmarks(self):

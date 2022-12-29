@@ -1,6 +1,6 @@
 import unittest
 import pytest
-from src.CLIConfig import *
+from src.pyceph.CLIConfig import *
 
 @pytest.fixture
 def get_default_config():

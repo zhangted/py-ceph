@@ -3,8 +3,8 @@ from unittest import mock
 import pytest
 import torch
 
-from src.CLIConfig import *
-from src.ModelWrapper import *
+from src.pyceph.CLIConfig import *
+from src.pyceph.ModelWrapper import *
 
 # https://gist.github.com/rohan-varma/a0a75e9a0fbe9ccc7420b04bff4a7212
 def validate_state_dicts(model_state_dict_1, model_state_dict_2):

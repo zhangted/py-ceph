@@ -1,21 +1,18 @@
 # Predict 19 Cephlometric Landmarks from a Cephalogram
 PyTorch solution to find 19 cephalometric landmarks from a lateral cephalogram from CLI.
 
-Model provided to predict landmarks is trained from the source code of [Cephalometric Landmark Detection by Attentive Feature Pyramid Fusion and Regression-Voting](https://arxiv.org/pdf/1908.08841.pdf). Repo [here](https://github.com/runnanchen/Anatomic-Landmark-Detection).
+Model provided to predict landmarks is trained from the source code and datasets from [Cephalometric Landmark Detection by Attentive Feature Pyramid Fusion and Regression-Voting](https://arxiv.org/pdf/1908.08841.pdf). Repo [here](https://github.com/runnanchen/Anatomic-Landmark-Detection).
 
 <br>
 
 # How to use py-ceph?
-py-ceph accepts CLI usage for single file interactive view or batch processing. 
-
-Build the package by navigating to the package directory and running
 ```commandline
-  pip install -e .
+  pip install git+https://github.com/zhangted/py-ceph
 ```
 
 <br>
 
-## Python (Ex Usage)
+## Python (Usage Examples)
 ```python
   from pyceph import predict
 
@@ -61,6 +58,7 @@ Output
 <br>
 
 ## Dependencies
+- Python 3.10+
 - pyyaml
 - pytest
 - torch

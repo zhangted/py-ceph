@@ -1,7 +1,7 @@
 import unittest
 from unittest import mock
 
-from src.Helpers import *
+from src.pyceph.Helpers import *
 
 class HelpersTest(unittest.TestCase):
 

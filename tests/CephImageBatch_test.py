@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 from skimage import io
 
-from src.CephImageBatch import *
+from src.pyceph.CephImageBatch import *
 
 @pytest.fixture
 def newCephImageBatch_single():
