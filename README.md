@@ -14,7 +14,7 @@ Model provided to predict landmarks is trained from the source code and datasets
 
 ## Python (Usage Examples)
 ```python
-  from pyceph import predict
+  from pyceph.pyceph import predict
 
   results = predict(image_src='tests/test-images/001.jpg', device='cpu')
   for res in results: print(res)
@@ -29,12 +29,12 @@ Model provided to predict landmarks is trained from the source code and datasets
 ## Single file processing (CLI)
 
 ```commandline
-  py-ceph --image_src [my-single-image-path]
+  py-ceph --image_src "image path string"
 ```
 
 Output
-- the image interactively with a grid
-- the labeled landmarks to the console
+- image with landmarks shown in pyplot viewer
+- labeled landmarks displayed in console
 
 <img src="single.png" alt="single file processing example" width="500"/><br><br>
 
@@ -42,14 +42,21 @@ Output
 ## Batch processing (CLI)
 
 ```commandline
-  py-ceph --image_folder [my-image-folder-path]
+  py-ceph --image_folder "image folder path string"
 ```
 Output
 - create `predicted_images` folder in provided directory
-  - each image overlayed with predicted ceph landmarks
-  - csv of the coordinates for each labeled landmark
+  - image overlayed with predicted landmarks
+  - csv with the coordinates for each labeled landmark
 
 <br><br><br>
+
+## Testing
+In the app directory, run
+```commandline
+  pytest
+```
+<br>
 
 ## To-do
 - <s>Non-CLI usage</s>

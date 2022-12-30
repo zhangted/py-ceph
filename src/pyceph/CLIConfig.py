@@ -17,7 +17,7 @@ def set_torch_device(config):
 def load_inputs_defaults():
   try:
     input_yaml_path = pkg_resources.resource_filename(__name__, 'input.yml')
-    print(input_yaml_path)
+    print(f"loading inputs from: {input_yaml_path}")
     with open(input_yaml_path, 'r') as stream:
       return yaml.safe_load(stream)
   except Exception as e: terminate(e)

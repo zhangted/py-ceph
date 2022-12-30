@@ -16,10 +16,8 @@ class ModelWrapper:
   def load_model(self):
     with gzip.open(self.model_path, 'rb') as zipped_model:
       device = torch.device(self.device)
-      print(f"Running on device: {device}")
+      print(f"Running inference on device: {device}")
       return torch.load(zipped_model, map_location=device)
-
-
 
 '''
 # save model as gzip

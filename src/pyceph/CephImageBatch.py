@@ -131,6 +131,6 @@ class CephImageBatch:
     modelWrapper = ModelWrapper(config, from_cli=False)
     model = modelWrapper.load_model()
     for ceph_img in self.batch: ceph_img.process(model, config)
-    if len(self.batch) == 1: return self.batch[0].to_dict()
+    if len(self.batch) == 1: return [self.batch[0].to_dict()]
     return map(lambda x: x.to_dict(), self.batch)
 
