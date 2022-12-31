@@ -1,4 +1,4 @@
-# Predict 19 Cephlometric Landmarks from a Cephalogram
+# Predict Landmarks on a Cephalogram
 PyTorch solution to find 19 cephalometric landmarks from a lateral cephalogram from CLI.
 
 Model provided to predict landmarks is trained from the source code and datasets from [Cephalometric Landmark Detection by Attentive Feature Pyramid Fusion and Regression-Voting](https://arxiv.org/pdf/1908.08841.pdf). Repo [here](https://github.com/runnanchen/Anatomic-Landmark-Detection).
